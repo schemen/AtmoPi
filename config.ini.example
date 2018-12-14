@@ -1,0 +1,11 @@
+[CONFIG]
+AP_LOCATION="Livingroom"
+AP_NAME="AtmoPy 1"
+POLL_INTERVAL=60
+INFLUXDB_DATABASE=homeatmopy
+INFLUXDB_SERVER=db.example.com
+INFLUXDB_PORT=8086
+INFLUXDB_USER=root
+INFLUXDB_PASSWORD=root
+SENSOR_LIST=mock,mock_temp,grove_temp_hum_pro
+DEBUG=False
