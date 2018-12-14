@@ -27,7 +27,7 @@ initialize_logger("log/")
 # Create the core CLI launcher
 @click.group()
 def cli():
-    """Welcome to AtmoPi, your very own Weather station"""
+    """Welcome to AtmoPi, your very own DIY Weather station"""
     pass
 
 #######################################
@@ -35,7 +35,7 @@ def cli():
 #######################################
 @cli.command('start')
 def start():
-    """ Start AtmoPi"""
+    """Start AtmoPi"""
     logging.info("Starting the AtmoPi Agent...")
     # Initiate QUEUE FOR ALL THE PY
     logging.info("Launching the Queue...")
