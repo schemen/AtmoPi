@@ -25,7 +25,7 @@ def create_pointvalue(sensor_data):
 def initialize_logger(output_dir):
     logger = logging.getLogger()
     
-    if config["DEBUG"]:
+    if config["DEBUG"] == "True":
         outputlevel = "debug"
         logger.setLevel(logging.DEBUG)
     else:
