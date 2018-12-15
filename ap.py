@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-import os
 import sys
 import click
 import logging
 from queue import Queue
 from threading import Thread
-import bin.config as Config
-from bin.exporters import Exporter
-from bin.collector import Collector
-from bin.utils import initialize_logger
+import utils as utils
+from exporters import Exporter
+from collector import Collector
+from utils import initialize_logger
 
 
 # Python 3 is required!
@@ -18,7 +17,7 @@ if sys.version_info[0] < 3:
 
 
 # Load config right at the start
-config = Config.load_config()
+config = utils.load_config()
 
 # Logging
 initialize_logger("log/")
@@ -38,6 +37,10 @@ def start():
     """Start AtmoPi"""
     logging.info("Starting the AtmoPi Agent...")
     # Initiate QUEUE FOR ALL THE PY
+
+    logging.debug("Validating config file")
+
+
     logging.info("Launching the Queue...")
     q = Queue()
 
@@ -88,6 +91,7 @@ def db_reset():
     export.launch_client()
     export.drop_database()
     logging.info("Done.")
+
 
 # Start the run
 if __name__ == '__main__':

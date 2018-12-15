@@ -4,10 +4,10 @@ import logging
 from queue import Queue
 from datetime import datetime
 from time import sleep
-import bin.config as Config
+import utils
 
 # Load config right at the start
-config = Config.load_config()
+config = utils.load_config()
 
 set_interval = int(config["POLL_INTERVAL"])
 min_interval = 30

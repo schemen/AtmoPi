@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import logging
 from queue import Queue
-from time import sleep
 from threading import Thread
-import bin.config as Config
-from bin.sensors import mock,mock_temp,grove_temp_hum_pro
+import utils as utils
+from sensors import grove_temp_hum_pro, mock, mock_temp
+
 
 class Collector(object):
 
@@ -17,12 +17,11 @@ class Collector(object):
     def __init__(self, queue: Queue):
 
         # Load config right at the start
-        self.config = Config.load_config()
+        self.config = utils.load_config()
 
         self.sensor_list = self.config["SENSOR_LIST"].split(",")
         self.sensor_list = [sensor.strip() for sensor in self.sensor_list]
         self.queue = queue
-
 
     def launch_sensors(self):
         logging.info("Collector Started!")
