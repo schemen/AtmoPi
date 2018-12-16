@@ -23,27 +23,8 @@ def create_pointvalue(sensor_data):
 
 def initialize_logger(output_dir):
     config = load_config()
-    logger = logging.getLogger()
-    
-    if config["DEBUG"] == "True":
-        outputlevel = "debug"
-        logger.setLevel(logging.DEBUG)
-    else:
-        outputlevel = "info"
-        logger.setLevel(logging.INFO)
-
-    logger.propagate = False
-
-    # create console handler and set level to info
-    handler = logging.StreamHandler()
-    if outputlevel == "debug":
-        handler.setLevel(logging.DEBUG)
-        formatter = logging.Formatter("%(levelname)s: %(message)s")
-    elif outputlevel == "info":
-        handler.setLevel(logging.INFO)
-        formatter = logging.Formatter("%(message)s")
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+    level = logging.DEBUG if config["DEBUG"] == "True" else logging.INFO
+    logging.basicConfig(format="%(levelname)s: %(message)s", level=level)
 
 
 def create_folder(folder):

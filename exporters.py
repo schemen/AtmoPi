@@ -8,8 +8,6 @@ from influxdb import InfluxDBClient
 from influxdb.exceptions import InfluxDBClientError
 
 
-
-
 class Exporter(object):
 
     def __init__(self, queue: Queue):

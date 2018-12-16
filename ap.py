@@ -4,10 +4,10 @@ import click
 import logging
 from queue import Queue
 from threading import Thread
-import utils as utils
+
+import utils
 from exporters import Exporter
 from collector import Collector
-from utils import initialize_logger
 
 
 # Python 3 is required!
@@ -15,12 +15,12 @@ if sys.version_info[0] < 3:
     sys.stdout.write("Sorry, requires Python 3.x, not Python 2.x\n")
     sys.exit(1)
 
+# Logging
+utils.initialize_logger("log/")
 
 # Load config right at the start
 config = utils.load_config()
 
-# Logging
-initialize_logger("log/")
 
 
 # Create the core CLI launcher
@@ -28,6 +28,7 @@ initialize_logger("log/")
 def cli():
     """Welcome to AtmoPi, your very own DIY Weather station"""
     pass
+
 
 #######################################
 ### Verify command                  ###
@@ -39,8 +40,6 @@ def start():
     # Initiate QUEUE FOR ALL THE PY
 
     logging.debug("Validating config file")
-
-
     logging.info("Launching the Queue...")
     q = Queue()
 
@@ -56,8 +55,6 @@ def start():
     Thread(target=collect.launch_sensors).run()
     
 
-
-
 #######################################
 ### Sensor commands                ###
 #######################################
@@ -65,6 +62,7 @@ def start():
 def sensor():
     """Commands regarding the sensors"""
     pass
+
 
 @sensor.command()
 def status():

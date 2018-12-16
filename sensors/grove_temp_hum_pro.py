@@ -8,7 +8,7 @@ try:
 except ModuleNotFoundError:
     sys.stdout.write("Groves Sensor won't work as grovepi module is missing!\n")
 except RuntimeError:
-    logging.info('Can\'t import grovepi - not running on raspberry pi?')
+    print('Can\'t import grovepi - not running on raspberry pi?')
     # TODO disable module if we can't import this
 
 from queue import Queue

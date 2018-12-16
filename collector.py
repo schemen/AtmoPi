@@ -2,6 +2,7 @@
 import logging
 from queue import Queue
 from threading import Thread
+
 import utils as utils
 from sensors import grove_temp_hum_pro, mock, mock_temp
 
