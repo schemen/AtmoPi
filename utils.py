@@ -6,7 +6,8 @@ import sys
 
 
 def create_pointvalue(sensor_data):
-    pointValue = {
+    config = load_config()
+    point_value = {
         "measurement": sensor_data["name"],
         "tags": {
             "ap_location": config["AP_LOCATION"],
@@ -16,8 +17,8 @@ def create_pointvalue(sensor_data):
         "fields": sensor_data["fields"]
 
     }
-    logging.debug("Point Value: \n %s", pointValue)
-    return pointValue
+    logging.debug("Point Value: \n %s", point_value)
+    return point_value
 
 
 def initialize_logger(output_dir):
