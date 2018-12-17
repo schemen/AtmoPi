@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-import os
 import sys
 import click
 import logging
 from queue import Queue
 from threading import Thread
-import bin.config as Config
-from bin.exporters import Exporter
-from bin.collector import Collector
-from bin.utils import initialize_logger
+
+import utils
+from exporters import Exporter
+from collector import Collector
 
 
 # Python 3 is required!
@@ -16,12 +15,12 @@ if sys.version_info[0] < 3:
     sys.stdout.write("Sorry, requires Python 3.x, not Python 2.x\n")
     sys.exit(1)
 
+# Logging
+utils.initialize_logger("log/")
 
 # Load config right at the start
-config = Config.load_config()
+config = utils.load_config()
 
-# Logging
-initialize_logger("log/")
 
 
 # Create the core CLI launcher
@@ -29,6 +28,7 @@ initialize_logger("log/")
 def cli():
     """Welcome to AtmoPi, your very own DIY Weather station"""
     pass
+
 
 #######################################
 ### Verify command                  ###
@@ -38,6 +38,8 @@ def start():
     """Start AtmoPi"""
     logging.info("Starting the AtmoPi Agent...")
     # Initiate QUEUE FOR ALL THE PY
+
+    logging.debug("Validating config file")
     logging.info("Launching the Queue...")
     q = Queue()
 
@@ -53,8 +55,6 @@ def start():
     Thread(target=collect.launch_sensors).run()
     
 
-
-
 #######################################
 ### Sensor commands                ###
 #######################################
@@ -62,6 +62,7 @@ def start():
 def sensor():
     """Commands regarding the sensors"""
     pass
+
 
 @sensor.command()
 def status():
@@ -88,6 +89,7 @@ def db_reset():
     export.launch_client()
     export.drop_database()
     logging.info("Done.")
+
 
 # Start the run
 if __name__ == '__main__':

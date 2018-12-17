@@ -2,12 +2,10 @@
 import logging
 from time import sleep
 from queue import Queue
-import bin.config as Config
-from bin.utils import create_pointvalue
+import utils as utils
+from utils import create_pointvalue
 from influxdb import InfluxDBClient
 from influxdb.exceptions import InfluxDBClientError
-
-
 
 
 class Exporter(object):
@@ -15,7 +13,7 @@ class Exporter(object):
     def __init__(self, queue: Queue):
 
         # Load config right at the start
-        config = Config.load_config()
+        config = utils.load_config()
 
         self.client = None
 
@@ -27,7 +25,6 @@ class Exporter(object):
 
         self.queue = queue
 
-
     def exporter(self):
         logging.info("Exporter started!")
         while True:
@@ -37,15 +34,15 @@ class Exporter(object):
                     try:
                         self.write(message)
                     except InfluxDBClientError as exception:
-                        logging.warn("Error!  %s \n Putting Entry back into queue.", exception)
+                        logging.warning("Error!  %s \n Putting Entry back into queue.", exception)
                         self.queue.put(message)
                     
                 sleep(1)
 
-
     def launch_client(self):
         # Start Client
-        self.client = InfluxDBClient(host=self.influxdb_server, port=self.influxdb_port, username=self.influxdb_user, password=self.influxdb_password, database=self.influxdb_database)
+        self.client = InfluxDBClient(host=self.influxdb_server, port=self.influxdb_port, username=self.influxdb_user,
+                                     password=self.influxdb_password, database=self.influxdb_database)
 
     def create_database(self):
         self.client.create_database(self.influxdb_database)
