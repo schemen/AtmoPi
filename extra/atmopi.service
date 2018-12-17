@@ -1,0 +1,10 @@
+[Unit]
+Description=AtmoPi Service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c "cd /opt/AtmoPi && /opt/AtmoPi/venv/bin/python /opt/AtmoPi/ap.py start"
+
+[Install]
+WantedBy=multi-user.target
