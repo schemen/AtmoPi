@@ -58,9 +58,11 @@ def start(queue: Queue):
         
         sleep(interval)
 
+
 def query_sensor():
     [temp,humidity] = grovepi.dht(sensor,white)
     return temp, humidity
+
 
 def verify_data(sensor_data):
     if not math.isnan(sensor_data[0]) and not math.isnan(sensor_data[1]):
@@ -69,6 +71,7 @@ def verify_data(sensor_data):
     else:
         logging.warn("%s data unhealthy! Values: %s", sensor_name, str(sensor_data))
         return False
+
 
 def status():
     logging.debug("Polling %s...", sensor_name)
