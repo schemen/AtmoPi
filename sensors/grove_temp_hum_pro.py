@@ -63,7 +63,7 @@ def query_sensor():
     return temp, humidity
 
 def verify_data(sensor_data):
-    if isinstance(sensor_data[0], (int, float)):
+    if not math.isnan(sensor_data[0]) and not math.isnan(sensor_data[1]):
         logging.debug("%s data healthy: %s", sensor_name, str(sensor_data))
         return True
     else:
