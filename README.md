@@ -1,5 +1,32 @@
 # AtmoPi
 
+A project that allows you to collect sensor data with a Raspberry Pi and save them in a time-series database (InfluxDB for now).
+
+## Why?
+
+Curiosity mostly. Also, looking around for products that offer simple local polling of data I was kind of depressed to see that in my budget, all of them were `cloud-enabled` - meaning all of the data of my home were on some manufacturers cloud and sometimes even publicly available.
+
+This also reduces reliability if you want some control mechanism (Like turning on the heaters when it gets to cold) because what you do when the API is offline.
+
+## Goals
+
+* Record data environment data from your home
+* Create sensor modules for various modules that are available for raspberry pi
+* Send data somewhere or allow for local polling
+
+## Current state
+
+The project is a hobby and still very alpha. What it can do so far:
+
+* Basic framework is here for adding more sensors and sending data
+* InfluxDB exporter
+
+## Available sensors
+
+See sensor list below
+
+# Usage
+
 ## Create and install virtual environment
 ```x-sh
 git clone https://github.com/schemen/AtmoPi.git && cd AtmoPi
@@ -8,8 +35,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 deactivate
 ```
-## Usage
-### Help output
+
+## Help output
 
 ```
 $ ./ap.py --help
@@ -26,7 +53,7 @@ Commands:
   start   Start AtmoPi
 ```
 
-### Configuration
+## Configuration
 Copy the config.ini.example to config.ini
 ```
 [CONFIG]
