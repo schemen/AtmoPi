@@ -33,7 +33,7 @@ white = 1   # The White colored sensor.
 
 
 def start(queue: Queue):
-
+    logging.info("%s started.", sensor_name)
     if set_interval > min_interval:
         interval = set_interval
     else:
@@ -54,7 +54,7 @@ def start(queue: Queue):
             }
             queue.put(sensor_data)
         else:
-            logging.warn("%s delivered fautly data, dropping.", sensor_name)
+            logging.warn("Dropping unhealthy data")
         
         sleep(interval)
 
